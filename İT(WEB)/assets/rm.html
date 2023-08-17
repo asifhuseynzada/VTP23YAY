@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake API Example with Search and More</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+rel="stylesheet"
+integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+crossorigin="anonymous"
+/>
+
+<style>
+  /* Your CSS styles here */
+  table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-left: 30%;
+    
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  input[type="ch"] {
+    margin-top: 10px;
+    padding: 5px;
+    width: 20%;
+    box-sizing: border-box;
+    margin-left: 55%;
+    margin-bottom: 20px;
+  }
+  #more {
+    margin-top: 10px;
+    padding: 5px;
+    width: 5%;
+    box-sizing: border-box;
+    margin-left: 75%;
+    margin-top: 10px;
+  }
+  #searchButton {
+    margin-top: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+  <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center gap-5">
+        <a class="navbar-brand">VTP23YAY</a>
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#staticBackdrop"
+          aria-controls="staticBackdrop"
+        >
+          ☰
+        </button>
+      </div>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        <a href="../assets/login.html"><i class="fa-solid fa-user " style="color: #fff ; font-size: 25px; margin-left: 5px; margin-top: 5px;"></i></a>
+      </form>
+    </div>
+  </nav>
+  <div
+  class="offcanvas offcanvas-start dropdown " style="width: 220px;"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  id="staticBackdrop"
+  aria-labelledby="staticBackdropLabel"
+  data-bs-theme="dark"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">VTP23YAY</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column mb-3">
+    <div class="d-flex flex-column">
+      <a href="../index.html" class="text-decoration-none fs-5 text-white lh-lg"
+        >Dashboard</a
+      >
+      <a
+        href="../assets/events.html"
+        class="text-decoration-none fs-5 text-white lh-lg">Events</a>
+      <a href="../assets/chart.html" class="text-decoration-none fs-5 text-white lh-lg">Charts</a>
+      <a href="../assets/members.html" class="text-decoration-none fs-5 text-white lh-lg">Members</a>
+      <a href="../assets/hr.html" class="text-decoration-none fs-5 text-white lh-lg">HR</a>
+          <a href="../assets/acc.html" class="text-decoration-none fs-5 text-white lh-lg">ACC</a>
+          <a href="../assets/lp.html" class="text-decoration-none fs-5 text-white lh-lg">LP</a>
+          <a href="../assets/web.html" class="text-decoration-none fs-5 text-white lh-lg">İT(WEB)</a>
+          <a href="../assets/rm.html" class="text-decoration-none fs-5 text-white lh-lg">İT(RM)</a>
+          <a href="../assets/im.html" class="text-decoration-none fs-5 text-white lh-lg">İM</a>
+    </div>
+  </div>
+</div>
+<h1 class="text-xl-center">İT(RM) şöbəsi</h1>
+  <div
+  class="offcanvas offcanvas-start dropdown"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  id="staticBackdrop"
+  aria-labelledby="staticBackdropLabel"
+  data-bs-theme="dark"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">VTP23YAY</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  
+</div>
+<input type="ch" id="search" placeholder="Axtar..">
+<button id="searchButton">Search</button>
+
+<table id="cedvel">
+  <thead>
+    <tr>
+      <th>Nomre</th>
+      <th>Ad,Soyad</th>
+      <th>Email</th>
+      <th>Yaş</th>
+      <th>Cins</th>
+      <th>Universitet</th>
+    </tr>
+  </thead>
+  <tbody id="fake-api-data">
+    <!-- Sahte API verileri burada görüntülenecek -->
+  </tbody>
+</table>
+
+<script>
+  const fakeApiUrl = "https://jsonplaceholder.typicode.com/comments";
+  const more = document.getElementById("more");
+  const searchInput = document.getElementById("search");
+  const searchButton = document.getElementById("searchButton");
+  let start = 0;
+  let key = 20;
+  let number = 1;
+
+  const genders = ["Male", "Female"];
+  
+  // Sahte isimlerin dizisi
+  const fakeNames = [
+    "John Doe", "Jane Smith", "Michael Johnson", "Emily Williams", "William Brown",
+    "Emma Jones", "David Davis", "Olivia Martinez", "Liam Anderson", "Sophia Taylor",
+    "Noah Wilson", "Isabella Miller", "James Moore", "Ava Harris", "Logan Clark",
+    "Mia Thomas", "Benjamin Lewis", "Amelia Lee", "Ethan Turner", "Harper White",
+    "Alexander Thompson", "Ella Martin", "Daniel Garcia", "Grace Rodriguez",
+    "Matthew Martinez", "Chloe Jackson", "Joseph Harris", "Zoe Taylor"
+  ];
+
+  // Sahte API verilerini alın
+  function fetchData() {
+    fetch(fakeApiUrl)
+      .then(response => response.json())
+      .then(data => {
+        let arraydata = [...data];
+        arraydata = arraydata.slice(start, start + key);
+        const fakeApiDataContainer = document.getElementById("fake-api-data");
+        const universities = [
+          "University A",
+          "University B",
+          "University C",
+          "University D",
+          "University E",
+        ];
+
+        for (let i = 0; i < arraydata.length; i++) {
+          const randomUser = arraydata[i];
+          const age = Math.floor(Math.random() * 40) + 18; // Random yaş 18-57 arasında
+          const university = universities[Math.floor(Math.random() * universities.length)];
+          const gender = genders[Math.floor(Math.random() * genders.length)];
+          const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+
+          const row = document.createElement("tr");
+          row.classList.add("user-entry");
+          row.innerHTML = `
+            <td>${number++}</td>
+            <td>${name}</td>
+            <td>${randomUser.email}</td>
+            <td>${age}</td>
+            <td>${gender}</td>
+            <td>${university}</td>
+          `;
+          fakeApiDataContainer.appendChild(row);
+        }
+      })
+      .catch(error => console.error("Error fetching fake API data:", error));
+  }
+
+  function clearTable() {
+    const fakeApiDataContainer = document.getElementById("fake-api-data");
+    fakeApiDataContainer.innerHTML = '';
+    number = 1;
+    start = 0;
+  }
+
+  function performSearch() {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    if (searchTerm === '') {
+      clearTable();
+      fetchData();
+      return;
+    }
+
+    clearTable();
+
+    fetch(fakeApiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const filteredData = data.filter(user => user.name.toLowerCase().includes(searchTerm));
+        let arraydata = [...filteredData];
+        arraydata = arraydata.slice(start, start + key);
+
+        const fakeApiDataContainer = document.getElementById("fake-api-data");
+        const universities = [
+          "University A",
+          "University B",
+          "University C",
+          "University D",
+          "University E",
+        ];
+
+        for (let i = 0; i < arraydata.length; i++) {
+          const randomUser = arraydata[i];
+          const age = Math.floor(Math.random() * 40) + 18; 
+          const university = universities[Math.floor(Math.random() * universities.length)];
+          const gender = genders[Math.floor(Math.random() * genders.length)];
+          const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+
+          const row = document.createElement("tr");
+          row.classList.add("user-entry");
+          row.innerHTML = `
+            <td>${number++}</td>
+            <td>${name}</td>
+            <td>${randomUser.email}</td>
+            <td>${age}</td>
+            <td>${gender}</td>
+            <td>${university}</td>
+          `;
+          fakeApiDataContainer.appendChild(row);
+        }
+      })
+      .catch(error => console.error("Error fetching fake API data:", error));
+  }
+
+  searchInput.addEventListener("input", performSearch);
+  searchButton.addEventListener("click", performSearch);
+
+
+
+  fetchData();
+</script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+crossorigin="anonymous"
+></script>
+</body>

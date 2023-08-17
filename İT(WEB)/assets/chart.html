@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+    crossorigin="anonymous"
+  />
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+
+<body>
+    <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center gap-5">
+            <a class="navbar-brand">VTP23YAY</a>
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#staticBackdrop"
+              aria-controls="staticBackdrop"
+            >
+              ☰
+            </button>
+          </div>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            <a href="login.html"><i class="fa-solid fa-user " style="color: #fff ; font-size: 25px; margin-left: 5px; margin-top: 5px;"></i></a>
+          </form>
+        </div>
+      </nav>
+      <div
+      class="offcanvas offcanvas-start dropdown " style="width: 220px;"
+      data-bs-backdrop="static"
+      tabindex="-1"
+      id="staticBackdrop"
+      aria-labelledby="staticBackdropLabel"
+      data-bs-theme="dark"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="staticBackdropLabel">VTP23YAY</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
+          <a href="../index.html" class="text-decoration-none fs-5 text-white lh-lg"
+            >Dashboard</a
+          >
+          <a
+            href="../assets/events.html"
+            class="text-decoration-none fs-5 text-white lh-lg">Events</a>
+          <a href="../assets/chart.html" class="text-decoration-none fs-5 text-white lh-lg">Charts</a>
+          <a href="../assets/members.html" class="text-decoration-none fs-5 text-white lh-lg">Members</a>
+          <a href="../assets/hr.html" class="text-decoration-none fs-5 text-white lh-lg">HR</a>
+          <a href="../assets/acc.html" class="text-decoration-none fs-5 text-white lh-lg">ACC</a>
+          <a href="../assets/lp.html" class="text-decoration-none fs-5 text-white lh-lg">LP</a>
+          <a href="../assets/web.html" class="text-decoration-none fs-5 text-white lh-lg">İT(WEB)</a>
+          <a href="../assets/rm.html" class="text-decoration-none fs-5 text-white lh-lg">İT(RM)</a>
+          <a href="../assets/im.html" class="text-decoration-none fs-5 text-white lh-lg">İM</a>
+        </div>
+      </div>
+    </div>
+    <h1 class="text-xl-center">Charts</h1>
+    
+    <div class="d-flex align-items-center justify-content-end">
+        <div id="myChart" style="width: 600px; height: 300px;"></div>
+        <div id="myChart2" style="width: 600px; height: 300px;"></div>
+      
+      </div>
+
+
+      <script>
+         google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Cinsiyet', 'Kisi', 'Qadin', {role: 'style'}],
+        ['', 3, null, '#36A2EB'], 
+        ['', null, 5, '#FF5733'], 
+        ['', 8, null, '#36A2EB'],  
+        ['', null, 7, '#FF5733'], 
+        ['', 2, null, '#36A2EB'],  
+        ['', null, 9, '#FF5733'], 
+        ['', 10, null, '#36A2EB'],
+        ['', null, 11, '#FF5733'], 
+        ['', 13, null, '#36A2EB'], 
+        ['', null, 16, '#FF5733'], 
+    ]);
+
+    var options = {
+        title: '',
+        
+        
+        bars: 'vertical',
+        colors: ['#36A2EB', '#FF5733'] 
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('myChart'));
+    var chart2 = new google.visualization.ColumnChart(document.getElementById('myChart2'));
+    chart.draw(data, options);
+    chart2.draw(data, options);
+}
+      </script>
+       <script
+       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+       crossorigin="anonymous"
+     ></script>
+</body>
+</html>

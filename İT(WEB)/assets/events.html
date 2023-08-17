@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+</head>
+<style>
+  .calendar {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+    background-color: #f0f0f0;
+  }
+  .prev-month,
+  .next-month {
+    cursor: pointer;
+  }
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 1px solid #ccc;
+  }
+  .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+  }
+  .day.other-month {
+    color: #ccc;
+  }
+  .appointment {
+    font-size: 12px;
+    padding: 2px;
+    background-color: #e6e6e6;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    
+  } 
+  .wite{
+    
+    width: 50% !important;
+    margin-left: 25%;
+  }
+</style>
+<body>
+ 
+  <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center gap-5">
+        <a class="navbar-brand">VTP23YAY</a>
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#staticBackdrop"
+          aria-controls="staticBackdrop"
+        >
+          ☰
+        </button>
+      </div>
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        <a href="login.html"><i class="fa-solid fa-user " style="color: #fff ; font-size: 25px; margin-left: 5px; margin-top: 5px;"></i></a>
+      </form>
+    </div>
+  </nav>
+  <div
+  class="offcanvas offcanvas-start dropdown " style="width: 220px;"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  id="staticBackdrop"
+  aria-labelledby="staticBackdropLabel"
+  data-bs-theme="dark"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">VTP23YAY</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column mb-3">
+    <div class="d-flex flex-column">
+      <a href="../index.html" class="text-decoration-none fs-5 text-white lh-lg"
+        >Dashboard</a
+      >
+      <a
+        href="../assets/events.html"
+        class="text-decoration-none fs-5 text-white lh-lg">Events</a>
+      <a href="../assets/chart.html" class="text-decoration-none fs-5 text-white lh-lg">Charts</a>
+      <a href="../assets/members.html" class="text-decoration-none fs-5 text-white lh-lg">Members</a>
+      <a href="../assets/hr.html" class="text-decoration-none fs-5 text-white lh-lg">HR</a>
+      <a href="../assets/acc.html" class="text-decoration-none fs-5 text-white lh-lg">ACC</a>
+      <a href="../assets/lp.html" class="text-decoration-none fs-5 text-white lh-lg">LP</a>
+      <a href="../assets/web.html" class="text-decoration-none fs-5 text-white lh-lg">İT(WEB)</a>
+      <a href="../assets/rm.html" class="text-decoration-none fs-5 text-white lh-lg">İT(RM)</a>
+      <a href="../assets/im.html" class="text-decoration-none fs-5 text-white lh-lg">İM</a>
+    </div>
+  </div>
+</div>
+<h1 class="text-xl-center">Events</h1>
+<div class="calendar">
+  <div class="calendar-header">
+    <span class="prev-month" onclick="prevMonth()">&#10094;</span>
+    <span id="current-month-year"></span>
+    <span class="next-month" onclick="nextMonth()">&#10095;</span>
+  </div>
+  <div class="calendar-days">
+    <div class="day">Sun</div>
+    <div class="day">Mon</div>
+    <div class="day">Tue</div>
+    <div class="day">Wed</div>
+    <div class="day">Thu</div>
+    <div class="day">Fri</div>
+    <div class="day">Sat</div>
+  </div>
+  <div id="calendar-body" class="calendar-days"></div>
+</div>
+
+<div class="container mt-3 text-xl-center" >
+  <h2>Görüş təyin et</h2>
+  <div class="m-md-4">
+    <label for="meeting-date ">Təqvim:</label>
+    <input type="date" id="meeting-date" required>
+  </div>
+  <div class="m-md-5">
+    <label for="meeting-time">Saat:</label>
+    <input type="time" id="meeting-time" required>
+  </div>
+  <button class="btn btn-primary mt-3 m-sm-3" onclick="scheduleMeeting()">Vaxti teyin et</button>
+  <ul id="appointment-list" class="mt-1 w-auto wite"></ul>
+</div>
+
+
+
+<script>
+  const currentDate = new Date();
+  let currentMonth = currentDate.getMonth();
+  let currentYear = currentDate.getFullYear();
+  let selectedDate = currentDate.getDate();
+
+  function updateCalendar() {
+    const calendarBody = document.getElementById('calendar-body');
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+    const prevDays = new Date(currentYear, currentMonth, 0).getDate();
+
+    document.getElementById('current-month-year').textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+
+    calendarBody.innerHTML = '';
+
+    for (let i = 0; i < firstDayIndex; i++) {
+      const dayElement = document.createElement('div');
+      dayElement.classList.add('day', 'other-month');
+      dayElement.textContent = prevDays - firstDayIndex + i + 1;
+      calendarBody.appendChild(dayElement);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayElement = document.createElement('div');
+      dayElement.classList.add('day');
+      dayElement.textContent = day;
+      dayElement.addEventListener('click', () => selectDate(day));
+      calendarBody.appendChild(dayElement);
+    }
+  }
+
+  function prevMonth() {
+    if (currentMonth === 0) {
+      currentMonth = 11;
+      currentYear--;
+    } else {
+      currentMonth--;
+    }
+    updateCalendar();
+  }
+
+  function nextMonth() {
+    if (currentMonth === 11) {
+      currentMonth = 0;
+      currentYear++;
+    } else {
+      currentMonth++;
+    }
+    updateCalendar();
+  }
+
+  function selectDate(day) {
+    selectedDate = day;
+  }
+
+  function scheduleMeeting() {
+    const meetingDate = document.getElementById('meeting-date').value;
+    const meetingTime = document.getElementById('meeting-time').value;
+
+    const appointmentList = document.getElementById('appointment-list');
+    const listItem = document.createElement('li');
+    listItem.textContent = `Meeting on ${meetingDate} at ${meetingTime}`;
+    listItem.classList.add('appointment');
+    appointmentList.appendChild(listItem);
+  }
+
+  updateCalendar();
+</script>
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+crossorigin="anonymous"
+></script>
+</body>
+</html>
